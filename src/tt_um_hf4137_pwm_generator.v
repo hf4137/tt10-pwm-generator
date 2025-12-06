@@ -31,7 +31,7 @@ module tt_um_hf4137_pwm_generator (
     always @(posedge clk)
     begin
         counter_debounce <= counter_debounce + 1;
-               if(counter_debounce>=25000000)  
+               //if(counter_debounce>=25000000)  
                // for running on FPGA -- comment when running simulation
                if(counter_debounce>=1) 
                // for running simulation -- comment when running on FPGA
