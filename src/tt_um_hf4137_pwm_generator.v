@@ -16,7 +16,7 @@ module tt_um_hf4137_pwm_generator (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-    wire inc_d = ui_in[0]
+    wire inc_duty = ui_in[0]
     wire dec_duty = ui_in[1]
     wire PWM_OUT
     wire slow_clk_enable; // slow clock enable signal for debouncing FFs
