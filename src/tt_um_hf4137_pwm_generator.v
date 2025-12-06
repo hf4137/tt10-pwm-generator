@@ -16,9 +16,9 @@ module tt_um_hf4137_pwm_generator (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-    wire inc_duty = ui_in[0]
-    wire dec_duty = ui_in[1]
-    wire PWM_OUT
+    wire inc_duty = ui_in[0];
+    wire dec_duty = ui_in[1];
+    wire PWM_OUT;
     wire slow_clk_enable; // slow clock enable signal for debouncing FFs
     reg[27:0] counter_debounce=0;// counter for creating slow clock enable signals 
     wire tmp1,tmp2,duty_inc;// temporary flip-flop signals for debouncing the increasing button
@@ -44,13 +44,13 @@ module tt_um_hf4137_pwm_generator (
     
      // debouncing FFs for increasing button
     
-     DFF_PWM PWM_DFF1(clk,slow_clk_enable,increase_duty,tmp1);
+     DFF_PWM PWM_DFF1(clk,slow_clk_enable,inc_duty,tmp1);
      DFF_PWM PWM_DFF2(clk,slow_clk_enable,tmp1, tmp2); 
      assign duty_inc =  tmp1 & (~ tmp2) & slow_clk_enable;
     
      // debouncing FFs for decreasing button
     
-     DFF_PWM PWM_DFF3(clk,slow_clk_enable,decrease_duty, tmp3);
+     DFF_PWM PWM_DFF3(clk,slow_clk_enable,dec_duty, tmp3);
      DFF_PWM PWM_DFF4(clk,slow_clk_enable,tmp3, tmp4);
     
      assign duty_dec =  tmp3 & (~ tmp4) & slow_clk_enable;
