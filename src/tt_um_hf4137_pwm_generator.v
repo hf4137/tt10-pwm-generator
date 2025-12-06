@@ -73,6 +73,24 @@ module tt_um_hf4137_pwm_generator (
      end
 
      assign PWM_OUT = counter_PWM < DUTY_CYCLE ? 1:0;
+
+      // Assign Outputs
+      assign uo_out[0] = PWM_OUT; 
+      assign uo_out[1] = 1'b0; 
+      assign uo_out[2] = 1'b0;  
+      assign uo_out[3] = 1'b0;  
+      assign uo_out[4] = 1'b0;  
+      assign uo_out[5] = 1'b0;  
+      assign uo_out[6] = 1'b0;  
+      assign uo_out[7] = 1'b0;
+
+      // All output pins must be assigned. If not used, assign to 0.
+      assign uio_out = 0;
+      assign uio_oe  = 0;
+
+      // List all unused inputs to prevent warnings
+      wire _unused = &{ena, rst_n, ui_in[7:2], uio_in 1'b0};
+    
     endmodule
 
     // Debouncing DFFs for push buttons on FPGA
@@ -85,22 +103,3 @@ module tt_um_hf4137_pwm_generator (
           Q <= D;
     end 
     endmodule 
-
-  // Assign Outputs
-  assign uo_out[0] = PWM_OUT; 
-  assign uo_out[1] = 1'b0; 
-  assign uo_out[2] = 1'b0;  
-  assign uo_out[3] = 1'b0;  
-  assign uo_out[4] = 1'b0;  
-  assign uo_out[5] = 1'b0;  
-  assign uo_out[6] = 1'b0;  
-  assign uo_out[7] = 1'b0;
-
-  // All output pins must be assigned. If not used, assign to 0.
-  assign uio_out = 0;
-  assign uio_oe  = 0;
-
-  // List all unused inputs to prevent warnings
-  wire _unused = &{ena, rst_n, ui_in[7:2], uio_in 1'b0};
-
-endmodule
